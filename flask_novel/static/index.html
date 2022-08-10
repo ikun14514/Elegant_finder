@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>风雅颂</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <style>
+            .name{
+                -web-kit-appearance:none;
+                -moz-appearance: none;
+                font-size:1.4em;
+                height:2.0em;
+                border-radius:5px;
+                border:1px solid #c8cccf;
+                color:#6a6f77;
+                outline:0;
+                text-align:center;
+            }
+
+            button {
+                background-color: #1E90FF; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
+
+            div.search{
+                height: 40px;
+                width: 550px; 
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: auto;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;      
+            }
+
+            .black_overlay {
+                display: none;
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                z-index: 1001;
+                -moz-opacity: 0.8;
+                opacity: .80;
+                filter: alpha(opacity=80);
+            }
+
+            .white_content {
+                display: none;
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                width: 80%;
+                height: 80%;
+                border: 16px solid lightblue;
+                background-color: white;
+                z-index: 1002;
+                overflow: auto;
+            }
+
+            .white_content_small {
+                display: none;
+                position: absolute;
+                top: 20%;
+                left: 30%;
+                width: 40%;
+                height: 50%;
+                border: 16px solid lightblue;
+                background-color: white;
+                z-index: 1002;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body onload="load()">
+        <div data-v-36c163cb=""></div>
+        <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <header id="nav-1" role="banner"><div class="container">
+            <div class="header-inner">
+                <h1><a href="https://htmlpage.cn/"></a></h1>
+                <nav role="navigation">
+                    <ul><li></li><li></li>
+                        <li>
+                            <select id="sel">
+                                <option value="1" code_id="1">普通小说</option>
+                                <option value="2" code_id="2">番茄小说</option>
+                            </select>
+                        </li>
+                        <li><a onclick="ShowDiv('MyDiv1','fade1')" class="active">更新日志</a></li>
+                        <li><a onclick="ShowDiv('MyDiv2','fade2')" id="iwzsu">内容下载</a></li>
+                        <li><a href="https://space.bilibili.com/672444488" id="iy9eh">关于作者</a></li>
+                        <li id="thili"></li>
+                    </ul></nav></div></div>
+        </header>
+        &nbsp;
+        <div class="search">
+            <input class="name" type="text" name="name" id="name" placeholder="请输入搜索条件">
+            <button type="button" onclick="Search()">开始搜索</button>
+        </div>  
+        <div class="panel">
+            <div class="big-title">
+                <span id="irik">
+                    <b>风雅颂</b>
+                </span>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="search">
+                <button onclick="ShowDiv('MyDiv','fade')">搜索结果</button>
+            </div>
+            <div id="loc">
+                
+            </div>
+        </div>
+        <!--弹出层时背景层DIV-->
+        <div id="fade" class="black_overlay">
+        </div>
+
+        <div id="MyDiv" class="white_content">
+
+            <div style="text-align: right; cursor: default; height: 40px;">
+                <span style="font-size: 16px;" onclick="CloseDiv('MyDiv','fade')">关闭</span>
+            </div>
+            <div id="mod">
+                
+            </div>
+            <div id="otd">
+                
+            </div>
+        </div>
+
+        <!--弹出层时背景层DIV-->
+        <div id="fade1" class="black_overlay">
+        </div>
+
+        <div id="MyDiv1" class="white_content">
+
+            <div style="text-align: right; cursor: default; height: 40px;">
+                <span style="font-size: 16px;" onclick="CloseDiv('MyDiv1','fade1')">关闭</span>
+            </div>
+            <p>更新日志</p>
+            &nbsp;
+            <p>2022年5月15日</p>
+            &nbsp;
+            <p>1、新增加对番茄的适配；</p>
+            &nbsp;
+            <p>2022年5月14日</p>
+            &nbsp;
+            <p>1、重构网站部分接口；</p>
+            <p>2、对后端代码进行优化；</p>
+            <p>3、页面增加指向网站创作者的链接；</p>
+            &nbsp;
+            <p>2022年5月12日</p>
+            &nbsp;
+            <p>1、完善网站需要登录才能访问的功能；</p>
+            <p>2、修复部分bug；</p>
+        </div>
+
+        <!--弹出层时背景层DIV-->
+        <div id="fade2" class="black_overlay">
+        </div>
+
+        <div id="MyDiv2" class="white_content">
+
+            <div style="text-align: right; cursor: default; height: 40px;">
+                <span style="font-size: 16px;" onclick="CloseDiv('MyDiv2','fade2')">关闭</span>
+            </div>
+            <div class="search">
+                <input class="name" type="text" name="name" id="name_1" placeholder="请输入下载内容名称">
+                <button type="button" onclick="Download()">点击获取下载链接</button>
+            </div>  
+            <div id="pua"></div>
+        </div>
+        <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            function load(){
+                $.ajax({
+                    url: "/log_text",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {},
+                    success: function(msg){
+                        _vao = '<a>账户：' + msg["username"] + '</a>' + '<a href="/logout">退出登录</a>';
+                        document.getElementById("thili").innerHTML = _vao;
+                        _val = "";
+                        var len = msg["data"].length;
+                        for (var i = 0; i < len; i++) {
+                            _val += '<p>' + msg["data"][i] + '</p>';
+                            document.getElementById("loc").innerHTML = _val;
+                        }
+                    },
+                    error: function(msg){
+                        console.log(msg);
+                        _vc = '<a href="/static/login.html">登录</a>';
+                        document.getElementById("thili").innerHTML = _vc;
+                    }
+                })
+            }
+
+
+            function Download(){
+                var name = document.getElementById("name_1").value + ".txt";
+                console.log(name);
+                _html = "";
+                _html += '<a href="/download?fileName=' + name + '">' + name + '</a>';
+                document.getElementById("pua").innerHTML = _html;
+            }
+
+            function Search(){
+                var name = document.getElementById("name").value;
+                var code = document.getElementById("sel").value;
+                console.log(code);
+                $.ajax({
+                    type: "POST",
+                    url: "/api/get_js",
+                    dataType: "JSON",
+                    data: {
+                        "name": name,
+                        "code": code
+                    },
+                    success: function(response){
+                        _html = "";
+                        _bot = "";
+                        var book = response.length;
+                        var code = document.getElementById("sel").value;
+                        for (var i = 0; i < book; i++){
+                            var arr = new Array();
+                            var getin = response[i];
+                            var con = Object.keys(getin);
+                            var len = con.length;
+                            for (var n = 0; n < len; n++) {
+                                var getKey = con[n];
+                                var getVal = getin[getKey];
+                                arr[n] = {
+                                    "val": getVal,
+                                }
+                                _html += "<li>" + arr[n]["val"] + "</li>";
+                                document.getElementById("otd").innerHTML = _html;
+                                if (code == "1"){
+                                    if (n == 0){
+                                        console.log(4);
+                                        _bot += '<button onclick="chickMe(this)" data-name="'+ arr[0]["val"] +'">申请资源:' + arr[0]["val"] + '</button>&nbsp;';
+                                        document.getElementById("mod").innerHTML = _bot;
+                                    }
+                                }
+                                else if (code == "2"){
+                                    if (n == 4){
+                                        _bot += '<button onclick="chickMe(this)" data-name="'+ arr[0]["val"] +'" buid="' + arr[4]["val"] + '">申请资源:' + arr[0]["val"] + '</button>&nbsp;';
+                                        document.getElementById("mod").innerHTML = _bot;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+
+            function chickMe(e){
+                var name = e.getAttribute("data-name");
+                var code = document.getElementById("sel").value;
+                var buid = e.getAttribute("buid");
+                console.log(buid);
+                $.ajax({
+                    type: "GET",
+                    url: "/api/get_text",
+                    dataType: "JSON",
+                    data: {
+                        "name": name,
+                        "code": code,
+                        "buid": buid
+                    }
+                })
+            }
+
+
+            //弹出隐藏层
+            function ShowDiv(show_div, bg_div) { 
+                document.getElementById(show_div).style.display = 'block'; 
+                document.getElementById(bg_div).style.display = 'block'; 
+                var bgdiv = document.getElementById(bg_div); 
+                bgdiv.style.width = document.body.scrollWidth;  // bgdiv.style.height = $(document).height();
+                $("#" + bg_div).height($(document).height());
+                };
+
+            //关闭弹出层
+            function CloseDiv(show_div, bg_div) { 
+                document.getElementById(show_div).style.display = 'none'; 
+                document.getElementById(bg_div).style.display = 'none';
+            };
+        </script>
+    </body>
+<html>
