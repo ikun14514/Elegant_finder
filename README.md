@@ -66,3 +66,5 @@ fanqie.direct(book_id)
 ```
 fanqie.content(item_id)
 ```
+## 其他爬虫
+整理灵感，多久更新我也不知道，感觉自己在写一些过时的东西
