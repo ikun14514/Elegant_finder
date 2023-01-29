@@ -27,6 +27,8 @@ lambda x, y: self.thread(x, y)
 后面如果有不错的想法会补充进去的.
 ## FanQie.Novel.reptile
 得益于各路大神对**app**的一些操作，我们也就看到了某知名小说平台的爬虫(**广告少点我能写这个？**)  
+要使用程序，你得获取你某小说的**cookie**，也就是**https://fanqienovel.com/**中去获取.  
+然后在``Cookie line:7``这里填写上，或者你们自己添加一个方法来添加.  
 `search`方法获得书本基本信息，例如标题、作者、类型、封面等等，实例展示:  
 ```
 fanqie = FanQie() # 实例化类
