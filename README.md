@@ -11,6 +11,8 @@ pip install requests
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
 - 新增**Pixivel.reptile**
+- 优化**FanQie.Novel.reptile**结构
+- python版本需要3.10+来支持match-case语句
 ## Pixivel.reptile
 言归正传，这个爬虫文件我一年前就做好了，近期进行重构了一下，并加入了多线程下载的功能.  
 **Pixivel**是国内的网站，具体和国外是镜像还是啥关系没看过，只不过**api**极其相似(**懂我意思吧**).  
