@@ -85,7 +85,7 @@ fanqie.content(item_id)
 ## Proxy.reptile
 这是很早之前听群友提一嘴以后我做的收集代理的一个爬虫.  
 因为是很早之前写的，代码太烂了，索性直接重构了.  
-目标网站**www.beesproxy.com**，实例展示如下：  
+目标网站**beesproxy.com**，实例展示如下：  
 ```
 a = Proxy()
 a.run(page) # 该网站第0页和第1页一模一样
