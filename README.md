@@ -73,7 +73,7 @@ fanqie.direct(book_id)
       title: '章节标题',
       volume_name: '卷名'
     }
-    ]
+  ]
 }
 ```
 `content`方法获取正文，传参**item_id**，返回类型是一段**html**代码，实例展示：  
