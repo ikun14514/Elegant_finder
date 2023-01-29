@@ -62,7 +62,7 @@ fanqie.search('要搜索的内容')
 }
 ```
 `direct`方法获得书本目录，传参进去呢，就是**book_id**，实例展示：  
-```
+```python
 fanqie.direct(book_id)
 ```
 返回数据结构：
@@ -79,14 +79,14 @@ fanqie.direct(book_id)
 }
 ```
 `content`方法获取正文，传参**item_id**，返回类型是一段**html**代码，实例展示：  
-```
+```python
 fanqie.content(item_id)
 ```
 ## Proxy.reptile
 这是很早之前听群友提一嘴以后我做的收集代理的一个爬虫.  
 因为是很早之前写的，代码太烂了，索性直接重构了.  
 目标网站**beesproxy.com**，实例展示如下：  
-```
+```python
 a = Proxy()
 a.run(page) # 该网站第0页和第1页一模一样
 ```
