@@ -3,15 +3,17 @@
 通过不断优化、改进慢慢做成这样.  
 也会定期进行维护检测(**可能**).  
 **meth.py**是我二次封装的**requests库**，毕竟那么大一堆重复性的代码，谁也不想每次都写吧(**偷懒罢了**).  
-使用之前请务必安装**requests库**:
+使用之前请务必安装**requests库**和**lxml库**:
 ```
 pip install requests
+pip install lxml
 ```
 ## Change Log
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
 - 新增**Pixivel.reptile**
 - 优化**FanQie.Novel.reptile**结构
+- 重构代理爬取**Proxy.reptile**
 - python版本需要3.10+来支持**match-case**语句
 ## Pixivel.reptile
 言归正传，这个爬虫文件我一年前就做好了，近期进行重构了一下，并加入了**多线程**下载的功能.  
@@ -80,6 +82,15 @@ fanqie.direct(book_id)
 ```
 fanqie.content(item_id)
 ```
+## Proxy.reptile
+这是很早之前听群友提一嘴以后我做的收集代理的一个爬虫.  
+因为是很早之前写的，代码太烂了，索性直接重构了.  
+目标网站**www.beesproxy.com**，实例展示如下：  
+```
+a = Proxy()
+a.run(page) # 该网站第0页和第1页一模一样
+```
+收集起来的代理怎么使用呢，**meth.py**里面的**方法**应该表达的很清楚了吧.  
 ## 其他爬虫
 整理灵感，多久更新我也不知道，感觉自己在写一些过时的东西
 ## LICENSE
