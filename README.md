@@ -47,7 +47,8 @@ fanqie.search('要搜索的内容')
 返回数据结构:  
 ```
 {
-  msg: [
+  msg:
+  [
   {
     abstract: '简介',
     author: '作者',
@@ -65,7 +66,8 @@ fanqie.direct(book_id)
 返回数据结构：
 ```
 {
-  "msg": [
+  "msg":
+  [
     {
       item_id: '章节独一无二的标识',
       title: '章节标题',
