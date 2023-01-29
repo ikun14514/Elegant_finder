@@ -1,3 +1,3 @@
 from threading import Thread
 import re
-from meth import Meth
+from packet.meth import Meth
