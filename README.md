@@ -19,21 +19,21 @@ pip install lxml
 言归正传，这个爬虫文件我一年前就做好了，近期进行重构了一下，并加入了**多线程**下载的功能.  
 **Pixivel**是国内的网站，具体和国外是镜像还是啥关系没看过，只不过**api**极其相似(**懂我意思吧**).  
 使用案例：  
-```
+```python
 pa = Pa() # 实例化类
 pa.run('这里填写检索的内容', 这里填写页数) # 这是填了多少页就获取第多少页的图片
 ```
 在这里推荐一种循环方法`map()`，具体操作看下面  
-```
+```python
 list(map(lambda x: a.run('大白腿', x), range(11)))
 ```
 如果第24行报错，你们把`image`文件夹建好就行，修改保存位置也是第24行.  
-```
+```python
 open(f'image/{pid}.jpg', "wb")
 ```
 多线程的关闭方法(**其实我觉得没必要写，这爬虫的效率全靠多线程**):  
 第71行中的`thread`换成`download`就好了:  
-```
+```python
 lambda x, y: self.thread(x, y)
 ```
 后面如果有不错的想法会补充进去的.
@@ -42,7 +42,7 @@ lambda x, y: self.thread(x, y)
 要使用程序，你得获取你某小说的**cookie**，也就是**fanqienovel.com**中去获取.  
 然后在``Cookie line:7``这里填写上，或者你们自己添加一个方法来添加.  
 `search`方法获得书本基本信息，例如标题、作者、类型、封面等等，实例展示:  
-```
+```python
 fanqie = FanQie() # 实例化类
 fanqie.search('要搜索的内容')
 ```
