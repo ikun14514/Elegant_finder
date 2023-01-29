@@ -49,13 +49,13 @@ fanqie.search('要搜索的内容')
 {
   msg:
   [
-  {
-    abstract: '简介',
-    author: '作者',
-    book_id: '书的唯一标识',
-    thumb_url: '封面链接',
-    title: '书名'
-  }
+    {
+      abstract: '简介',
+      author: '作者',
+      book_id: '书的唯一标识',
+      thumb_url: '封面链接',
+      title: '书名'
+    }
   ]
 }
 ```
