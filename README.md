@@ -14,6 +14,8 @@ pip install lxml
     - [Pixivel.reptile](#Pixivelreptile)
     - [FanQie.Novel.reptile](#FanQieNovelreptile)
     - [Proxy.reptile](#Proxyreptile)
+    - [其他爬虫](#其他爬虫)
+    - [LICENSE](#LICENSE)
 ## Change Log
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
