@@ -18,6 +18,8 @@ pip install lxml
     - [Pixivel.reptile](#Pixivelreptile)
     - [FanQie.Novel.reptile](#FanQieNovelreptile)
     - [Proxy.reptile](#Proxyreptile)
+    - [Bilibili.reptile](#Bilibilireptile)
+       - [视频下载](#视频下载)
     - [其他爬虫](#其他爬虫)
     - [LICENSE](#LICENSE)
 
@@ -106,6 +108,22 @@ a = Proxy()
 a.run(page) # 该网站第0页和第1页一模一样
 ```
 收集起来的代理怎么使用呢，**meth.py**里面的**方法**应该表达的很清楚了吧.  
+## Bilibili.reptile
+这个算是准备做一个系列吧，得益于大佬们不断整理的**api**，我这里几乎没有什么瓶颈的做了一个简略的初始版本.  
+### 视频下载
+
+|关键参数|             备注           |
+|--------|----------------------------|
+|  aid   |二选一，一般来说都是**bvid** |
+|  bvid  |                             |
+
+还有一些视频清晰度，需要使用**Cookie**来操作，我暂时没写，所以现在只能下载低画质的(**万能的网友应该能自己加上去**).  
+实例展示:  
+```python
+a = Bilibili()
+a.run('bvid', 'BV1814y1A7eU')
+```
+结果显示`BV1814y1A7eU => OK!`就是下载好了(**如果`line: 22`报错，请自己创建`video`文件夹，修改保存位置也在那里哦**)
 ## 其他爬虫
 整理灵感，多久更新我也不知道，感觉自己在写一些过时的东西
 ## LICENSE
