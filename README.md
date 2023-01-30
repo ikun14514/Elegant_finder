@@ -8,12 +8,12 @@
 pip install requests
 pip install lxml
 ```
-- [reptile.inclued/爬虫库](#reptile.inclued/爬虫库)
+- [reptile.inclued/爬虫库](#reptileinclued/爬虫库)
     - [Change Log](#Change-Log)
-      - [v0.1.0 (2023/1/30)](#v0.1.0 (2023/1/30))
-    - [Pixivel.reptile](#Pixivel.reptile)
-    - [FanQie.Novel.reptile](#FanQie.Novel.reptile)
-    - [Proxy.reptile](#Proxy.reptile)
+      - [v0.1.0(2023/1/30)](#v010-2023130)
+    - [Pixivel.reptile](#Pixivelreptile)
+    - [FanQie.Novel.reptile](#FanQieNovelreptile)
+    - [Proxy.reptile](#Proxyreptile)
 ## Change Log
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
