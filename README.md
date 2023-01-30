@@ -8,6 +8,10 @@
 pip install requests
 pip install lxml
 ```
+
+<details>
+<summary>目录</summary>
+
 - [reptile.inclued/爬虫库](#reptileinclued/爬虫库)
     - [Change Log](#Change-Log)
       - [v0.1.0(2023/1/30)](#v010-2023130)
@@ -16,6 +20,9 @@ pip install lxml
     - [Proxy.reptile](#Proxyreptile)
     - [其他爬虫](#其他爬虫)
     - [LICENSE](#LICENSE)
+
+</details>
+
 ## Change Log
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
