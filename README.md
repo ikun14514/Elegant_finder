@@ -28,7 +28,7 @@ pip install lxml
 ## Change Log
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
-- 新增**Pixivel.reptile**
+- 新增**Pixivel.reptile**, **Bilibili.reptile**
 - 优化**FanQie.Novel.reptile**结构
 - 重构代理爬取**Proxy.reptile**
 - python版本需要3.10+来支持**match-case**语句
