@@ -8,6 +8,12 @@
 pip install requests
 pip install lxml
 ```
+- [reptile.inclued/爬虫库](#reptile.inclued/爬虫库)
+    - [Change Log](#Change-Log)
+      - [v0.1.0 (2023/1/30)](#v0.1.0 (2023/1/30))
+    - [Pixivel.reptile](#Pixivel.reptile)
+    - [FanQie.Novel.reptile](#FanQie.Novel.reptile)
+    - [Proxy.reptile](#Proxy.reptile)
 ## Change Log
 ### v0.1.0 (2023/1/30)
 - 更正目录结构，增加可读性  
@@ -50,15 +56,15 @@ fanqie.search('要搜索的内容')
 ```
 {
   msg:
-  [
-    {
-      abstract: '简介',
-      author: '作者',
-      book_id: '书的唯一标识',
-      thumb_url: '封面链接',
-      title: '书名'
-    }
-  ]
+    [
+      {
+          abstract: '简介',
+          author: '作者',
+          book_id: '书的唯一标识',
+          thumb_url: '封面链接',
+          title: '书名'
+      }
+    ]
 }
 ```
 `direct`方法获得书本目录，传参进去呢，就是**book_id**，实例展示：  
@@ -68,14 +74,14 @@ fanqie.direct(book_id)
 返回数据结构：
 ```
 {
-  "msg":
-  [
-    {
-      item_id: '章节独一无二的标识',
-      title: '章节标题',
-      volume_name: '卷名'
-    }
-  ]
+  msg:
+    [
+      {
+        item_id: '章节独一无二的标识',
+        title: '章节标题',
+        volume_name: '卷名'
+      }
+    ]
 }
 ```
 `content`方法获取正文，传参**item_id**，返回类型是一段**html**代码，实例展示：  
