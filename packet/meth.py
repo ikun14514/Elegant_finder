@@ -32,12 +32,16 @@ class Meth:
 					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
 				case 'POST':
 					data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
+				case 'TGET':
+					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
 		else:
 			match methods:
 				case 'GET':
 					data = self.session.get(url=url, headers=headers, proxies=proxy)
 				case 'POST':
 					data = self.session.post(url=url, headers=headers, proxies=proxy)
+				case 'TGET':
+					data = self.session.get(url=url, headers=headers, proxies=proxy, stream=True)
 		data.encoding = encoding
 		match res:
 			case 'text':
@@ -46,3 +50,5 @@ class Meth:
 				return data.json()
 			case 'img':
 				return data.content
+			case 'timg':
+				return data.iter_content(chunk_size=104857600)
