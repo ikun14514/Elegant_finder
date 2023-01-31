@@ -124,7 +124,7 @@ a.run(page) # 该网站第0页和第1页一模一样
 ~~还有一些视频清晰度，需要使用**Cookie**来操作，我暂时没写，所以现在只能下载低画质的(**万能的网友应该能自己加上去**).~~  
 新加入的**Cookie**在没有大会员的情况下能下载普通1080P, **dash**类型的视频我还没有研究(**没有大会员**).  
 视频下载清晰度调整在`line: 54`, 下表列出清晰度对应的数字：  
-> 表格来自：https://github.com/SocialSisterYi/bilibili-API-collect
+> 表格来自：[bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
 
 | 值   | 含义           | 备注                                                         |
 | ---- | -------------- | ------------------------------------------------------------ |
