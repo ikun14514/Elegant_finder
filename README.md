@@ -1,18 +1,7 @@
-# Reptile.Inclued/爬虫库
-个人写的一点点爬虫.  
-通过不断优化、改进慢慢做成这样.  
-也会定期进行维护检测(**可能**).  
-**meth.py**是我二次封装的**requests库**，毕竟那么大一堆重复性的代码，谁也不想每次都写吧(**偷懒罢了**).  
-使用之前请务必安装**requests库**和**lxml库**:
-```
-pip install requests
-pip install lxml
-```
-
 <details>
 <summary>目录</summary>
 
-- [reptile.inclued/爬虫库](#reptileinclued/爬虫库)
+- [Reptile.Inclued/爬虫库](#ReptileInclued/爬虫库)
     - [Change Log](#Change-Log)
       - [v0.1.1 (2023/1/31)](#v011-2023131)
       - [v0.1.0 (2023/1/30)](#v010-2023130)
@@ -23,9 +12,20 @@ pip install lxml
        - [视频下载](#视频下载)
     - [其他爬虫](#其他爬虫)
     - [LICENSE](#LICENSE)
+- [Explore](#Explore)
 
 </details>
 
+# Reptile.Inclued/爬虫库
+个人写的一点点爬虫.  
+通过不断优化、改进慢慢做成这样.  
+也会定期进行维护检测(**可能**).  
+**meth.py**是我二次封装的**requests库**，毕竟那么大一堆重复性的代码，谁也不想每次都写吧(**偷懒罢了**).  
+使用之前请务必安装**requests库**和**lxml库**:
+```
+pip install requests
+pip install lxml
+```
 ## Change Log
 ### v0.1.1 (2023/1/31)
 - **Bilibili.reptile**新增**Cookie**及多线程下载
