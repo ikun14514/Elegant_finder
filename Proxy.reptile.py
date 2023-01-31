@@ -28,3 +28,8 @@ class Proxy(Meth):
 				port_list
 				))
 			list(map(lambda x: f.write(''.join((str(x), '\n'))), res))
+'''
+作者：UnAbuse
+githud地址：https://github.com/UnAbuse
+转载请注明出处
+'''
