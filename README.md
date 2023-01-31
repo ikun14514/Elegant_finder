@@ -14,7 +14,8 @@ pip install lxml
 
 - [reptile.inclued/爬虫库](#reptileinclued/爬虫库)
     - [Change Log](#Change-Log)
-      - [v0.1.0(2023/1/30)](#v010-2023130)
+      - [v0.1.1 (2023/1/31)](#v011-2023131)
+      - [v0.1.0 (2023/1/30)](#v010-2023130)
     - [Pixivel.reptile](#Pixivelreptile)
     - [FanQie.Novel.reptile](#FanQieNovelreptile)
     - [Proxy.reptile](#Proxyreptile)
