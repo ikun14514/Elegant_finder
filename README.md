@@ -151,3 +151,5 @@ a.run('bvid', 'BV1814y1A7eU')
 整理灵感，多久更新我也不知道，感觉自己在写一些过时的东西
 ## LICENSE
 MIT
+# Explore
+> [文档入口](/explore/IntegratedManagementSystem.md)
