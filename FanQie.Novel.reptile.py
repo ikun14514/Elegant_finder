@@ -69,3 +69,8 @@ class FanQie(Meth):
             return content_info['data']['content']
         except:
             return '未配置cookie或者cookie失效'
+'''
+作者：UnAbuse
+githud地址：https://github.com/UnAbuse
+转载请注明出处
+'''
