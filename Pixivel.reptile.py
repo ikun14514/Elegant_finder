@@ -72,3 +72,8 @@ class Pa(Meth):
 			return 1
 		except:
 			return 0
+'''
+作者：UnAbuse
+githud地址：https://github.com/UnAbuse
+转载请注明出处
+'''
