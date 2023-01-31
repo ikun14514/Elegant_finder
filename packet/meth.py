@@ -1,6 +1,12 @@
 import requests
 from random import randint
 
+'''
+作者：UnAbuse
+githud地址：https://github.com/UnAbuse
+转载请注明出处
+'''
+
 class Meth:
 	def __init__(self, proxy_list=None):
 		# 定义代理ip的列表
