@@ -153,4 +153,3 @@ class Bilibili(Meth):
 						return f"code: {url_list['code']}"
 			case _:
 				return f"code: {data['code']}"
-
