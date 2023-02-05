@@ -105,7 +105,8 @@ class Bilibili(Meth):
 			case 1:
 				return 'code: 1'
 
-	def run(self, bid, tid):
+	def vedio_run(self, bid, tid):
+		print(f'开始运行 => time: [{ctime()}]')
 		data = super(Bilibili, self).get_Html(
 			self.cid_url,
 			'GET',
@@ -119,6 +120,7 @@ class Bilibili(Meth):
 		match data['code']:
 			case 0:
 				cid = data['data']['cid']
+				print(f"视频CID:{cid}")
 				url_list = super(Bilibili, self).get_Html(
 					self.video_url,
 					'GET',
@@ -133,6 +135,7 @@ class Bilibili(Meth):
 					)
 				match url_list['code']:
 					case 0:
+						print(f"视频链接:{url_list['data']['durl'][0]['url']}")
 						data = super(Bilibili, self).get_Html(
 							url_list['data']['durl'][0]['url'],
 							'TGET',
@@ -141,7 +144,7 @@ class Bilibili(Meth):
 							self.encoding
 							)
 						list(map(lambda x: self.thread(tid, x, 'mp4'), data))
-						print(f'{tid} => OK!')
+						print(f'{tid} => OK!, time: [{ctime()}]')
 						return "code: 0"
 					case _:
 						return f"code: {url_list['code']}"
