@@ -1,3 +1,10 @@
+# -*- encoding: utf-8 -*-
+'''
+@File    :   PixivelReptile.py
+@Time    :   2023/02/05 20:53:55
+@Author  :   UnAbuse 
+'''
+
 from packet import *
 
 class Pa(Meth):
@@ -72,8 +79,3 @@ class Pa(Meth):
 			return 1
 		except:
 			return 0
-'''
-作者：UnAbuse
-githud地址：https://github.com/UnAbuse
-转载请注明出处
-'''

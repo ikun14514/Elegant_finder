@@ -1,10 +1,11 @@
-from packet import *
+# -*- encoding: utf-8 -*-
+'''
+@File    :   BilibiliReptile.py
+@Time    :   2023/02/05 20:53:03
+@Author  :   UnAbuse 
+'''
 
-'''
-作者:UnAbuse
-githud地址:https://github.com/UnAbuse
-转载请注明出处
-'''
+from packet import *
 
 class Bilibili(Meth):
 	def __init__(self):

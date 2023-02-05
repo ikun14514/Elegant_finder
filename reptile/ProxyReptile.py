@@ -1,3 +1,10 @@
+# -*- encoding: utf-8 -*-
+'''
+@File    :   ProxyReptile.py
+@Time    :   2023/02/05 20:54:36
+@Author  :   UnAbuse 
+'''
+
 from packet import *
 
 class Proxy(Meth):
@@ -28,8 +35,3 @@ class Proxy(Meth):
 				port_list
 				))
 			list(map(lambda x: f.write(''.join((str(x), '\n'))), res))
-'''
-作者：UnAbuse
-githud地址：https://github.com/UnAbuse
-转载请注明出处
-'''
