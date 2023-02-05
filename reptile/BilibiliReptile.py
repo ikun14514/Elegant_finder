@@ -1,11 +1,28 @@
 from packet import *
 
+'''
+作者:UnAbuse
+githud地址:https://github.com/UnAbuse
+转载请注明出处
+'''
+
 class Bilibili(Meth):
 	def __init__(self):
+		'''
+		1、Cookie的获取通过Cookie.txt来加载
+		2、直播与视频的headers不一样, 需要分开使用
+		'''
 		super(Bilibili, self).__init__()
-		Cookie = ""
+		with open('Cookie.txt', 'r+', encoding='utf-8') as f:
+			Cookie = f.read()
 		self.headers = {
 			'Referer': 'https://www.bilibili.com/',
+			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+			'Cookie': Cookie
+		}
+		self.live_headers = {
+			'Origin': 'https://live.bilibili.com',
+			'Referer': 'https://live.bilibili.com/',
 			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 			'Cookie': Cookie
 		}
@@ -13,22 +30,83 @@ class Bilibili(Meth):
 		self.cid_url = 'https://api.bilibili.com/x/web-interface/view'
 		self.video_url = 'https://api.bilibili.com/x/player/playurl'
 		self.qrcode_url = 'https://passport.bilibili.com/x/passport-login/web/qrcode/generate'
+		self.room_id_url = 'https://api.live.bilibili.com/room/v1/Room/get_info'
+		self.live_url = 'https://api.live.bilibili.com/room/v1/Room/playUrl'
 		self.lock = Lock()
 
-	def thread(self, pid, data):
-		t = Thread(target=self.download, args=(pid, data))
+	def thread(self, pid, data, met):
+		'''
+		开启多线程, 但是并未写join(), 考虑到主线程执行到这边一般都差不多
+		并且加了锁, 写了也没有必要
+		'''
+		t = Thread(target=self.download, args=(pid, data, met))
 		t.start()
 		return 1
 
-	def download(self, pid, data):
+	def download(self, pid, data, met):
+		'''
+		下载方法, 加锁保证不会乱序写入
+		唯一注意的是ab写入特性
+		'''
 		self.lock.acquire()
-		with open(f'vedio/{pid}.mp4', "ab") as f:
+		print(f'{current_thread().name} is run, byte: 512000, time: [{ctime()}]', end='\r')
+		with open(f'vedio/{pid}.{met}', "ab") as f:
 			f.write(data)
-			print('thread is done')
 		self.lock.release()
 		return 1
 
-	def run(self, bid, tid):
+	def live_run(self, room_id):
+		print(f'开始运行 => time: [{ctime()}]')
+		data = super(Bilibili, self).get_Html(
+			self.room_id_url,
+			'GET',
+			'json',
+			self.live_headers,
+			self.encoding,
+			{
+				'room_id': room_id
+			}
+			)
+		match data['code']:
+			case 0:
+				match data['data']['live_status']:
+					case 0:
+						return 'live_status: 0'
+					case _:
+						print(f"房间真实ID:{data['data']['room_id']}")
+						live_streaming = super(Bilibili, self).get_Html(
+							self.live_url,
+							'GET',
+							'json',
+							self.live_headers,
+							self.encoding,
+							{
+								'cid': data['data']['room_id'],
+								'quality': 4,
+								'platform': 'web'
+							}
+							)
+						match live_streaming['code']:
+							case 0:
+								url = live_streaming['data']['durl'][0]['url']
+								print(f'直播视频流链接：{url}')
+								dat = super(Bilibili, self).get_Html(
+									url,
+									'TGET',
+									'timg',
+									self.live_headers,
+									self.encoding
+									)
+								print(f'开始录制 => [{ctime()}]')
+								list(map(lambda x: self.thread(room_id, x, 'flv'), dat))
+								return 'code: 0'
+							case _:
+								return 'code: ' + live_streaming['code']
+			case 1:
+				return 'code: 1'
+
+	def vedio_run(self, bid, tid):
+		print(f'开始运行 => time: [{ctime()}]')
 		data = super(Bilibili, self).get_Html(
 			self.cid_url,
 			'GET',
@@ -42,6 +120,7 @@ class Bilibili(Meth):
 		match data['code']:
 			case 0:
 				cid = data['data']['cid']
+				print(f"视频CID:{cid}")
 				url_list = super(Bilibili, self).get_Html(
 					self.video_url,
 					'GET',
@@ -56,6 +135,7 @@ class Bilibili(Meth):
 					)
 				match url_list['code']:
 					case 0:
+						print(f"视频链接:{url_list['data']['durl'][0]['url']}")
 						data = super(Bilibili, self).get_Html(
 							url_list['data']['durl'][0]['url'],
 							'TGET',
@@ -63,14 +143,11 @@ class Bilibili(Meth):
 							self.headers,
 							self.encoding
 							)
-						list(map(lambda x: self.thread(tid, x), data))
-						print(f'{tid} => OK!')
+						list(map(lambda x: self.thread(tid, x, 'mp4'), data))
+						print(f'{tid} => OK!, time: [{ctime()}]')
+						return "code: 0"
 					case _:
-						return url_list['code']
+						return f"code: {url_list['code']}"
 			case _:
-				return data['code']
-'''
-作者：UnAbuse
-githud地址：https://github.com/UnAbuse
-转载请注明出处
-'''
+				return f"code: {data['code']}"
+
