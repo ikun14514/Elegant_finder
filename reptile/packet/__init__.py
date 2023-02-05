@@ -1,7 +1,8 @@
+# -*- encoding: utf-8 -*-
 '''
-作者：UnAbuse
-githud地址：https://github.com/UnAbuse
-转载请注明出处
+@File    :   __init__.py
+@Time    :   2023/02/05 20:52:31
+@Author  :   UnAbuse 
 '''
 
 from threading import Thread, Lock, current_thread

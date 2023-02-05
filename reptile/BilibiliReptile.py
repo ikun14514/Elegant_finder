@@ -1,10 +1,11 @@
-from packet import *
+# -*- encoding: utf-8 -*-
+'''
+@File    :   BilibiliReptile.py
+@Time    :   2023/02/05 20:53:03
+@Author  :   UnAbuse 
+'''
 
-'''
-作者:UnAbuse
-githud地址:https://github.com/UnAbuse
-转载请注明出处
-'''
+from packet import *
 
 class Bilibili(Meth):
 	def __init__(self):
@@ -16,9 +17,18 @@ class Bilibili(Meth):
 		with open('Cookie.txt', 'r+', encoding='utf-8') as f:
 			Cookie = f.read()
 		self.headers = {
-			'Referer': 'https://www.bilibili.com/',
-			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-			'Cookie': Cookie
+			'origin': 'https://www.bilibili.com/',
+			'referer': 'https://www.bilibili.com/',
+			'user-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+			'cookie': Cookie,
+			'accept': 'application/json, text/plain, */*'
+		}
+		self.live_headers = {
+			'origin': 'https://live.bilibili.com',
+			'referer': 'https://live.bilibili.com/',
+			'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+			'cookie': Cookie,
+			'accept': 'application/json, text/plain, */*'
 		}
 		self.live_headers = {
 			'Origin': 'https://live.bilibili.com',
@@ -150,4 +160,3 @@ class Bilibili(Meth):
 						return f"code: {url_list['code']}"
 			case _:
 				return f"code: {data['code']}"
-

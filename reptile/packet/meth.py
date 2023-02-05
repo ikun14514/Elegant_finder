@@ -1,11 +1,20 @@
-import requests
-from random import randint
+'''
+Author: UnAbuse w1748664255@163.com
+Date: 2023-02-05 17:21:29
+LastEditors: UnAbuse w1748664255@163.com
+LastEditTime: 2023-02-05 20:52:11
+FilePath: \py_code\reptile.inclued\reptile\packet\meth.py
+Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+'''
+# -*- encoding: utf-8 -*-
+'''
+@File    :   meth.py
+@Time    :   2023/02/05 20:51:30
+@Author  :   UnAbuse 
+'''
 
-'''
-作者：UnAbuse
-githud地址：https://github.com/UnAbuse
-转载请注明出处
-'''
+from requests import Session
+from random import randint
 
 class Meth:
 	def __init__(self, proxy_list=None):
@@ -16,7 +25,7 @@ class Meth:
 				self.proxy_list = []
 			case _:
 				self.proxy_list = proxy_list
-		self.session = requests.Session()
+		self.session = Session()
 
 	def get_ip(self, filename):
 		# 从文件中读取代理ip
