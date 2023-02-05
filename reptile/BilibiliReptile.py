@@ -30,6 +30,12 @@ class Bilibili(Meth):
 			'cookie': Cookie,
 			'accept': 'application/json, text/plain, */*'
 		}
+		self.live_headers = {
+			'Origin': 'https://live.bilibili.com',
+			'Referer': 'https://live.bilibili.com/',
+			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+			'Cookie': Cookie
+		}
 		self.encoding = 'utf-8'
 		self.cid_url = 'https://api.bilibili.com/x/web-interface/view'
 		self.video_url = 'https://api.bilibili.com/x/player/playurl'
