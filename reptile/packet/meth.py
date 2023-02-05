@@ -57,4 +57,4 @@ class Meth:
 			case 'img':
 				return data.content
 			case 'timg':
-				return data.iter_content(chunk_size=104857600)
+				return data.iter_content(chunk_size=512000)
