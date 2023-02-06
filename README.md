@@ -16,6 +16,13 @@
 
 </details>
 
+# 成品展示
+## BiliBili视频下载器v1.0
+这是通过**Bilibili.reptile**做出来的一个成品, 下面的`fix_m4s`算是针对电脑客户端下载的情况.  
+> 下载地址: [releases/tag/v1.0 ](https://github.com/UnAbuse/reptile.inclued/releases/tag/v1.0)  
+![图片1](/image/1.png)
+![图片2](/image/2.png)
+
 # Reptile.Inclued/爬虫库
 个人写的一点点爬虫.  
 通过不断优化、改进慢慢做成这样.  
