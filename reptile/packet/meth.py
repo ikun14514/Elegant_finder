@@ -17,53 +17,49 @@ from requests import Session
 from random import randint
 
 class Meth:
-	def __init__(self, proxy_list=None):
+	def __init__(self, proxy_list: list=None, size: int=None) -> None:
 		# 定义代理ip的列表
 		self.proxy_list = None
-		match self.proxy_list:
-			case None:
-				self.proxy_list = []
-			case _:
-				self.proxy_list = proxy_list
+		match proxy_list:
+			case None: self.proxy_list = []
+			case _: self.proxy_list = proxy_list
+		match size:
+			case None: self.size = 1048576
+			case _: self.size = size
 		self.session = Session()
 
-	def get_ip(self, filename):
+	def get_ip(self, filename:str):
+		'''
+		filename: 装着代理数据的文件, 需要带后缀
+		'''
 		# 从文件中读取代理ip
 		with open(filename, 'r+', encoding='utf-8') as file_data:
 			data = file_data.readlines()
 			self.proxy_list = list(map(lambda x: x.strip('\n'), data))
 
-	def get_Html(self, url, methods, res, headers, encoding, params=None):
+	def get_Html(self, url:str, methods:str, res:str, headers:dict, encoding:str, params:dict=None):
+		'''
+		url: 访问的链接;
+		methods: 访问方法, GET、POST、TGET;
+		res: 结果返回形式, TEXT、JSON、CONTENT、TCONTENT;
+		headers: 请求头;
+		params: 附带数据;
+		'''
 		# 判断是否使用本地代理外的代理
 		match len(self.proxy_list):
-			case 0:
-				proxy = None
-			case _:
-				proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
+			case 0: proxy = None
+			case _: proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
 		# 获取text,json格式
-		if params:
-			match methods:
-				case 'GET':
-					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
-				case 'POST':
-					data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
-				case 'TGET':
-					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
-		else:
-			match methods:
-				case 'GET':
-					data = self.session.get(url=url, headers=headers, proxies=proxy)
-				case 'POST':
-					data = self.session.post(url=url, headers=headers, proxies=proxy)
-				case 'TGET':
-					data = self.session.get(url=url, headers=headers, proxies=proxy, stream=True)
+		if params: params = params
+		else: params = None
+		match methods:
+			case 'GET': data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
+			case 'POST': data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
+			case 'TGET': data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
 		data.encoding = encoding
+		self.cookies = data.cookies
 		match res:
-			case 'text':
-				return data.text
-			case 'json':
-				return data.json()
-			case 'img':
-				return data.content
-			case 'timg':
-				return data.iter_content(chunk_size=512000)
+			case 'TEXT': return data.text
+			case 'JSON': return data.json()
+			case 'CONTENT': return data.content
+			case 'TCONTENT': return data.iter_content(chunk_size=self.size)
