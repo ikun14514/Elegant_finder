@@ -19,7 +19,8 @@
 ## BiliBili视频下载器v2.1
 这是通过**Bilibili.reptile**做出来的一个成品, 下面的`fix_m4s`算是针对电脑客户端下载的情况.  
 > 下载地址: [releases/tag/v2.1 ](https://github.com/UnAbuse/reptile.inclued/releases/tag/v2.1)  
-> 通过`pyside6`进行开发, 关于`m3u8`的直播录制暂时没有实现.(查看pyside6实现方法)[wiki]  
+> 通过`pyside6`进行开发, 关于`m3u8`的直播录制暂时没有实现.  
+> [查看pyside6实现方法](wiki)  
 > 最新通过`inno setup`进行二次封装.  
 > 支持扫码登录, 优化了**多线程下载**的思路.
 > 后面改进好了会**开源**供大家参考.  
