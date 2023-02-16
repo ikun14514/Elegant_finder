@@ -12,7 +12,6 @@
        - [视频下载](#视频下载)
     - [其他爬虫](#其他爬虫)
     - [LICENSE](#LICENSE)
-- [Explore](#Explore)
 
 </details>
 
