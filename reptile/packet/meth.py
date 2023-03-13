@@ -20,12 +20,27 @@ class Meth:
 	def __init__(self, proxy_list: list=None, size: int=None) -> None:
 		# 定义代理ip的列表
 		self.proxy_list = None
-		match proxy_list:
-			case None: self.proxy_list = []
-			case _: self.proxy_list = proxy_list
-		match size:
-			case None: self.size = 1048576
-			case _: self.size = size
+		try:
+			match proxy_list:
+				case None:
+					self.proxy_list = []
+				case _:
+					self.proxy_list = proxy_list
+			match size:
+				case None:
+					self.size = 1048576
+				case _:
+					self.size = size
+		except Exception as e:
+			print(e)
+			if proxy_list is None:
+				self.proxy_list = []
+			else:
+				self.proxy_list = proxy_list
+			if size is None:
+				self.size = 1048576
+			else:
+				self.size = size
 		self.session = Session()
 
 	def get_ip(self, filename:str):
@@ -45,21 +60,61 @@ class Meth:
 		headers: 请求头;
 		params: 附带数据;
 		'''
-		# 判断是否使用本地代理外的代理
-		match len(self.proxy_list):
-			case 0: proxy = None
-			case _: proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
-		# 获取text,json格式
-		if params: params = params
-		else: params = None
-		match methods:
-			case 'GET': data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
-			case 'POST': data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
-			case 'TGET': data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
-		data.encoding = encoding
-		self.cookies = data.cookies
-		match res:
-			case 'TEXT': return data.text
-			case 'JSON': return data.json()
-			case 'CONTENT': return data.content
-			case 'TCONTENT': return data.iter_content(chunk_size=self.size)
+		try:
+			# 判断是否使用本地代理外的代理
+			match len(self.proxy_list):
+				case 0:
+					proxy = None
+				case _:
+					proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
+			# 获取text,json格式
+			if params:
+				params = params
+			else:
+				params = None
+			match methods:
+				case 'GET':
+					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
+				case 'POST':
+					data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
+				case 'TGET':
+					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
+			data.encoding = encoding
+			self.cookies = data.cookies
+			match res:
+				case 'TEXT':
+					return data.text
+				case 'JSON':
+					return data.json()
+				case 'CONTENT':
+					return data.content
+				case 'TCONTENT':
+					return data.iter_content(chunk_size=self.size)
+		except Exception as e:
+			print(e)
+			# 判断是否使用本地代理外的代理
+			if len(self.proxy_list) == 0:
+				proxy = None
+			else:
+				proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
+			# 获取text,json格式
+			if params:
+				params = params
+			else:
+				params = None
+			if methods == 'GET':
+				data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
+			elif methods == 'POST':
+				data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
+			elif methods == 'TGET':
+				data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
+			data.encoding = encoding
+			self.cookies = data.cookies
+			if res == 'TEXT':
+				return data.text
+			elif res == 'JSON':
+				return data.json()
+			elif res == 'CONTENT':
+				return data.content
+			elif res == 'TCONTENT':
+				return data.iter_content(chunk_size=self.size)
