@@ -5,9 +5,9 @@
 @Author  :   UnAbuse 
 '''
 
-from packet import *
+from reptile.packet import *
 
-class FanQie(Meth):
+class FanQie:
     def __init__(self):
         # 定义基本参数
         super().__init__()
@@ -20,9 +20,7 @@ class FanQie(Meth):
         self.encoding = 'utf-8'
         self.directory_url = 'https://api5-normal-lf.fqnovel.com/reading/bookapi/directory/all_items/v/'
         self.content_url = 'https://novel.snssdk.com/api/novel/book/reader/full/v1/'
-
-    def proxy(self, filename):
-        super().get_ip()
+        self.meth = Meth()
 
     def search(self, keywords):
         # 获得书本基本信息
@@ -30,10 +28,10 @@ class FanQie(Meth):
             'aid': 13,
             'q': keywords
             }
-        book_list_info = super().get_Html(
+        book_list_info = self.meth.get_Html(
             self.search_url,
             'GET',
-            'json',
+            'JSON',
             self.headers,
             self.encoding,
             params
@@ -49,9 +47,10 @@ class FanQie(Meth):
             'app_name': 'novelapp',
             'version_code': 495
             }
-        direc_list_info = super().get_Html(
+        direc_list_info = self.meth.get_Html(
             self.directory_url,
-            'GET', 'json',
+            'GET',
+            'JSON',
             self.headers,
             self.encoding,
             params
@@ -64,10 +63,10 @@ class FanQie(Meth):
             'group_id': item_id,
             'item_id': item_id
             }
-        content_info = super().get_Html(
+        content_info = self.meth.get_Html(
             self.content_url,
             'GET',
-            'json',
+            'JSON',
             self.headers,
             self.encoding,
             params
@@ -76,3 +75,4 @@ class FanQie(Meth):
             return content_info['data']['content']
         except:
             return '未配置cookie或者cookie失效'
+
