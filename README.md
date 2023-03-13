@@ -39,6 +39,8 @@ pip install requests
 pip install lxml
 ```
 ## Change Log
+### v0.1.2 (2023/3/13)
+- **meth.py**兼容3.10以下不支持`match-case`语句版本
 ### v0.1.1 (2023/1/31)
 - **Bilibili.reptile**新增**Cookie**及多线程下载
 - **meth.py**增加支持大文件下载
