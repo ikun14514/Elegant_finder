@@ -15,6 +15,21 @@
 
 </details>
 
+## Change Log
+### v0.1.3 (2023/3/17)
+- **meth.py**兼容性增强, 采用更优雅的方式
+### v0.1.2 (2023/3/13)
+- **meth.py**兼容3.10以下不支持`match-case`语句版本
+### v0.1.1 (2023/1/31)
+- **Bilibili.reptile**新增**Cookie**及多线程下载
+- **meth.py**增加支持大文件下载
+### v0.1.0 (2023/1/30)
+- 更正目录结构，增加可读性  
+- 新增**Pixivel.reptile**, **Bilibili.reptile**
+- 优化**FanQie.Novel.reptile**结构
+- 重构代理爬取**Proxy.reptile**
+- python版本需要3.10+来支持**match-case**语句
+
 # 成品展示
 ## BiliBili视频下载器v2.1
 这是通过**Bilibili.reptile**做出来的一个成品, 下面的`fix_m4s`算是针对电脑客户端下载的情况.  
@@ -34,24 +49,12 @@
 也会定期进行维护检测(**可能**).  
 **meth.py**是我二次封装的**requests库**，毕竟那么大一堆重复性的代码，谁也不想每次都写吧(**偷懒罢了**).  
 使用之前请务必安装**requests库**和**lxml库**:
+
 ```
 pip install requests
 pip install lxml
 ```
-## Change Log
-### v0.1.3 (2023/3/17)
-- **meth.py**兼容性增强, 采用更优雅的方式
-### v0.1.2 (2023/3/13)
-- **meth.py**兼容3.10以下不支持`match-case`语句版本
-### v0.1.1 (2023/1/31)
-- **Bilibili.reptile**新增**Cookie**及多线程下载
-- **meth.py**增加支持大文件下载
-### v0.1.0 (2023/1/30)
-- 更正目录结构，增加可读性  
-- 新增**Pixivel.reptile**, **Bilibili.reptile**
-- 优化**FanQie.Novel.reptile**结构
-- 重构代理爬取**Proxy.reptile**
-- python版本需要3.10+来支持**match-case**语句
+
 ## Pixivel.reptile
 言归正传，这个爬虫文件我一年前就做好了，近期进行重构了一下，并加入了**多线程**下载的功能.  
 **Pixivel**是国内的网站，具体和国外是镜像还是啥关系没看过，只不过**api**极其相似(**懂我意思吧**).  
