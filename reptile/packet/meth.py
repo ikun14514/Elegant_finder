@@ -69,14 +69,14 @@ class Meth:
 			'proxies': proxy
 			}
 		}
+		res_info = {
+			'TEXT': lambda x: x.text,
+			'JSON': lambda x: x.json(),
+			'CONTENT': lambda x: x.content,
+			'TCONTENT': lambda x : x.iter_content(chunk_size=self.size)
+		}
 		data = self.methods[methods](**info[methods])
 		data.encoding = encoding
 		self.cookies = data.cookies
-		if res == 'TEXT':
-			return data.text
-		elif res == 'JSON':
-			return data.json()
-		elif res == 'CONTENT':
-			return data.content
-		elif res == 'TCONTENT':
-			return data.iter_content(chunk_size=self.size)
+		return res_info[res](data)
+
