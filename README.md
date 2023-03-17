@@ -39,6 +39,8 @@ pip install requests
 pip install lxml
 ```
 ## Change Log
+### v0.1.3 (2023/3/17)
+- **meth.py**兼容性增强, 采用更优雅的方式
 ### v0.1.2 (2023/3/13)
 - **meth.py**兼容3.10以下不支持`match-case`语句版本
 ### v0.1.1 (2023/1/31)
