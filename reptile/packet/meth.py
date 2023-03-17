@@ -1,11 +1,3 @@
-'''
-Author: UnAbuse w1748664255@163.com
-Date: 2023-02-05 17:21:29
-LastEditors: UnAbuse w1748664255@163.com
-LastEditTime: 2023-02-05 20:52:11
-FilePath: \py_code\reptile.inclued\reptile\packet\meth.py
-Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-'''
 # -*- encoding: utf-8 -*-
 '''
 @File    :   meth.py
@@ -20,28 +12,20 @@ class Meth:
 	def __init__(self, proxy_list: list=None, size: int=None) -> None:
 		# 定义代理ip的列表
 		self.proxy_list = None
-		try:
-			match proxy_list:
-				case None:
-					self.proxy_list = []
-				case _:
-					self.proxy_list = proxy_list
-			match size:
-				case None:
-					self.size = 1048576
-				case _:
-					self.size = size
-		except Exception as e:
-			print(e)
-			if proxy_list is None:
-				self.proxy_list = []
-			else:
-				self.proxy_list = proxy_list
-			if size is None:
-				self.size = 1048576
-			else:
-				self.size = size
+		if proxy_list is None:
+			self.proxy_list = []
+		else:
+			self.proxy_list = proxy_list
+		# 定义iter_content每次获取的大小
+		if size is None:
+			self.size = 1048576
+		else:
+			self.size = size
 		self.session = Session()
+		self.methods = {
+			'GET': self.session.get,
+			'POST': self.session.post,
+		}
 
 	def get_ip(self, filename:str):
 		'''
@@ -52,69 +36,47 @@ class Meth:
 			data = file_data.readlines()
 			self.proxy_list = list(map(lambda x: x.strip('\n'), data))
 
-	def get_Html(self, url:str, methods:str, res:str, headers:dict, encoding:str, params:dict=None):
+	def get_Html(self, url: str, methods: str, res: str, headers: dict=None, encoding: str=None, params: dict=None, stream: bool=False):
 		'''
 		url: 访问的链接;
-		methods: 访问方法, GET、POST、TGET;
+		methods: 访问方法, GET、POST;
 		res: 结果返回形式, TEXT、JSON、CONTENT、TCONTENT;
 		headers: 请求头;
 		params: 附带数据;
 		'''
-		try:
-			# 判断是否使用本地代理外的代理
-			match len(self.proxy_list):
-				case 0:
-					proxy = None
-				case _:
-					proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
-			# 获取text,json格式
-			if params:
-				params = params
-			else:
-				params = None
-			match methods:
-				case 'GET':
-					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
-				case 'POST':
-					data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
-				case 'TGET':
-					data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
-			data.encoding = encoding
-			self.cookies = data.cookies
-			match res:
-				case 'TEXT':
-					return data.text
-				case 'JSON':
-					return data.json()
-				case 'CONTENT':
-					return data.content
-				case 'TCONTENT':
-					return data.iter_content(chunk_size=self.size)
-		except Exception as e:
-			print(e)
-			# 判断是否使用本地代理外的代理
-			if len(self.proxy_list) == 0:
-				proxy = None
-			else:
-				proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
-			# 获取text,json格式
-			if params:
-				params = params
-			else:
-				params = None
-			if methods == 'GET':
-				data = self.session.get(url=url, headers=headers, params=params, proxies=proxy)
-			elif methods == 'POST':
-				data = self.session.post(url=url, headers=headers, data=params, proxies=proxy)
-			elif methods == 'TGET':
-				data = self.session.get(url=url, headers=headers, params=params, proxies=proxy, stream=True)
-			data.encoding = encoding
-			self.cookies = data.cookies
-			if res == 'TEXT':
-				return data.text
-			elif res == 'JSON':
-				return data.json()
-			elif res == 'CONTENT':
-				return data.content
-			elif res == 'TCONTENT':
-				return data.iter_content(chunk_size=self.size)
+		# 判断是否加载代理
+		if self.proxy_list == []:
+			proxy = None
+		else:
+			proxy = eval(self.proxy_list[randint(0, len(self.proxy_list)-1)])
+		# 获取text,json格式
+		if params:
+			params = params
+		else:
+			params = None
+		info = {
+			'GET': {
+			'url': url,
+			'headers': headers,
+			'params': params,
+			'proxies': proxy,
+			'stream': stream
+			},
+			'POST': {
+			'url': url,
+			'headers': headers,
+			'data': params,
+			'proxies': proxy
+			}
+		}
+		data = self.methods[methods](**info[methods])
+		data.encoding = encoding
+		self.cookies = data.cookies
+		if res == 'TEXT':
+			return data.text
+		elif res == 'JSON':
+			return data.json()
+		elif res == 'CONTENT':
+			return data.content
+		elif res == 'TCONTENT':
+			return data.iter_content(chunk_size=self.size)
