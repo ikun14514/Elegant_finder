@@ -5,19 +5,23 @@
 @Author  :   UnAbuse 
 '''
 
-from packet import *
+from reptile.packet import Meth
+from time import ctime, sleep
+from threading import Thread, Lock, current_thread
+import re
+from os.path import exists
+from os import mkdir, remove, rmdir
 
 class Bilibili:
 	def __init__(self, vedio_path: str, size: int=None) -> None:
-		'''
-		1、Cookie的获取通过Cookie.txt来加载
-		2、直播与视频的headers不一样, 需要分开使用
-		'''
+		# 判断Cookie.txt是否存在，不存在则创建
 		if not exists('Cookie.txt'): 
 			with open('Cookie.txt', 'w', encoding='utf-8') as f: pass
+		# 获取Cookie
 		with open('Cookie.txt', 'r+', encoding='utf-8') as f:
 			Cookie = f.read()
 		self.vedio_path = vedio_path
+		# 判断视频保存目录是否存在，不存在就创建
 		if not exists(vedio_path):
 			mkdir(vedio_path)
 		self.headers = {
@@ -35,19 +39,21 @@ class Bilibili:
 			'accept': 'application/json, text/plain, */*'
 		}
 		self.encoding = 'utf-8'
-		self.cid_url = 'https://api.bilibili.com/x/web-interface/view'
-		self.video_url = 'https://api.bilibili.com/x/player/playurl'
-		self.qrcode_url = 'https://passport.bilibili.com/x/passport-login/web/qrcode/generate'
-		self.room_id_url = 'https://api.live.bilibili.com/room/v1/Room/get_info'
-		self.live_url = 'https://api.live.bilibili.com/room/v1/Room/playUrl'
-		self.information_url = 'https://api.bilibili.com/x/space/myinfo'
+		self.apiDict = {
+			'cid_url': 'https://api.bilibili.com/x/web-interface/view',
+			'vedio_url': 'https://api.bilibili.com/x/player/playurl',
+			'qrcode_url': 'https://passport.bilibili.com/x/passport-login/web/qrcode/generate',
+			'room_id_url': 'https://api.live.bilibili.com/room/v1/Room/get_info',
+			'live_url': 'https://api.live.bilibili.com/room/v1/Room/playUrl',
+			'information_url': 'https://api.bilibili.com/x/space/myinfo'
+		}
 		self.lock = Lock()
 		self.meth = Meth(proxy_list=None, size=size)
 
 	def information(self):
 		print(f'[{ctime()}] 开始验证Cookie')
 		info = self.meth.get_Html(
-			url=self.information_url,
+			url=self.apiDict['information_url'],
 			methods='GET', res='JSON',
 			headers=self.headers,
 			encoding=self.encoding
@@ -92,14 +98,11 @@ class Bilibili:
 		'''
 		print(f'[{ctime()}] 开始运行')
 		data = self.meth.get_Html(
-			self.room_id_url,
-			'GET',
-			'JSON',
+			self.apiDict['room_id_url'],
+			'GET', 'JSON',
 			self.live_headers,
 			self.encoding,
-			{
-				'room_id': room_id
-			}
+			{'room_id': room_id}
 			)
 		match data['code']:
 			case 0:
@@ -109,9 +112,8 @@ class Bilibili:
 					case _:
 						print(f"[{ctime()}] 房间真实ID:{data['data']['room_id']}")
 						live_streaming = self.meth.get_Html(
-							self.live_url,
-							'GET',
-							'JSON',
+							self.apiDict['live_url'],
+							'GET', 'JSON',
 							self.live_headers,
 							self.encoding,
 							{
@@ -127,11 +129,10 @@ class Bilibili:
 								match methods:
 									case 'web':
 										dat = self.meth.get_Html(
-											url,
-											'TGET',
-											'TCONTENT',
+											url, 'GET', 'TCONTENT',
 											self.live_headers,
-											self.encoding
+											self.encoding,
+											stream=True
 											)
 										print(f'[{ctime()}] 开始录制')
 										list(map(lambda x: self.thread(room_id, x, 'flv'), dat))
@@ -147,14 +148,11 @@ class Bilibili:
 		'''
 		print(f'[{ctime()}] 开始运行')
 		data = self.meth.get_Html(
-			self.cid_url,
-			'GET',
-			'JSON',
+			self.apiDict['cid_url'],
+			'GET', 'JSON',
 			self.headers,
 			self.encoding,
-			{
-				bid: tid
-			}
+			{bid: tid}
 			)
 		match data['code']:
 			case 0:
@@ -166,9 +164,8 @@ class Bilibili:
 					fnval = 128
 					fourk = 1
 				url_list = self.meth.get_Html(
-					self.video_url,
-					'GET',
-					'JSON',
+					self.apiDict['video_url'],
+					'GET', 'JSON',
 					self.headers,
 					self.encoding,
 					{
@@ -222,11 +219,8 @@ class Bilibili:
 		headers = self.headers
 		headers['Range'] = f'bytes={start_byte}-{stop_byte}'
 		data = self.meth.get_Html(
-			url,
-			'GET',
-			'CONTENT',
-			headers,
-			self.encoding
+			url, 'GET', 'CONTENT',
+			headers, self.encoding
 			)
 		if not exists(f'{self.vedio_path}/{tid}'): mkdir(f'./{self.vedio_path}/{tid}')
 		with open(f'{self.vedio_path}/{tid}/{stop_byte}.link', 'wb') as f:
