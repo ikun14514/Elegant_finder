@@ -18,7 +18,7 @@ class FanQie:
             'Cookie': Cookie
             }
         self.encoding = 'utf-8'
-        self.directory_url = 'https://api5-normal-lf.fqnovel.com/reading/bookapi/directory/all_items/v/'
+        self.directory_url = 'https://novel.snssdk.com/api/novel/book/directory/list/v1/'
         self.content_url = 'https://novel.snssdk.com/api/novel/book/reader/full/v1/'
         self.meth = Meth()
 
@@ -55,7 +55,7 @@ class FanQie:
             self.encoding,
             params
             )
-        return direc_list_info['data']['item_data_list']
+        return direc_list_info['data']['item_list']
 
     def content(self, item_id):
         # 获取当前章节正文内容
@@ -75,4 +75,3 @@ class FanQie:
             return content_info['data']['content']
         except:
             return '未配置cookie或者cookie失效'
-
