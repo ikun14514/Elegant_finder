@@ -4,7 +4,7 @@ You can using the program to do something: to download photo as you like and tra
 About the usage is followed:
 
 ```[shell]
-// if you save the file in path, you can utilize command in followed.
+// if you save the file in path, you can utilize command in followed.  
 ./pixivel.py -n "detail about photo"
 ```
 
