@@ -82,51 +82,6 @@ open(f'image/{pid}.jpg', "wb")
 lambda x, y: self.thread(x, y)
 ```
 后面如果有不错的想法会补充进去的.
-## FanQie.Novel.reptile
-得益于各路大神对**app**的一些操作，我们也就看到了某知名小说平台的爬虫(**广告少点我能写这个？**)  
-要使用程序，你得获取你某小说的**cookie**，也就是**fanqienovel.com**中去获取.  
-然后在``Cookie line:7``这里填写上，或者你们自己添加一个方法来添加.  
-`search`方法获得书本基本信息，例如标题、作者、类型、封面等等，实例展示:  
-```python
-fanqie = FanQie() # 实例化类
-fanqie.search('要搜索的内容')
-```
-返回数据结构:  
-```
-{
-  msg:
-    [
-      {
-          abstract: '简介',
-          author: '作者',
-          book_id: '书的唯一标识',
-          thumb_url: '封面链接',
-          title: '书名'
-      }
-    ]
-}
-```
-`direct`方法获得书本目录，传参进去呢，就是**book_id**，实例展示：  
-```python
-fanqie.direct(book_id)
-```
-返回数据结构：
-```
-{
-  msg:
-    [
-      {
-        item_id: '章节独一无二的标识',
-        title: '章节标题',
-        volume_name: '卷名'
-      }
-    ]
-}
-```
-`content`方法获取正文，传参**item_id**，返回类型是一段**html**代码，实例展示：  
-```python
-fanqie.content(item_id)
-```
 ## Proxy.reptile
 这是很早之前听群友提一嘴以后我做的收集代理的一个爬虫.  
 因为是很早之前写的，代码太烂了，索性直接重构了.  
