@@ -1,13 +1,11 @@
-# notice
-
-因为某些重要的事情拖延，直到今年年末才会恢复维护。  
-For the crucial reason, I decide that put maintain off to the end of this year.
-
 <details>
 <summary>目录</summary>
 
 - [Reptile.Inclued/爬虫库](#ReptileInclued/爬虫库)
     - [Change Log](#Change-Log)
+      - [v0.1.4 (2024/1/15)](#v014-2024115)
+      - [v0.1.3 (2023/3/17)](#v013-2023317)
+      - [v0.1.2 (2023/3/13)](#v012-2023313)
       - [v0.1.1 (2023/1/31)](#v011-2023131)
       - [v0.1.0 (2023/1/30)](#v010-2023130)
     - [Pixivel.reptile](#Pixivelreptile)
@@ -21,6 +19,8 @@ For the crucial reason, I decide that put maintain off to the end of this year.
 </details>
 
 ## Change Log
+### v0.1.4 (2024/1/15)
+- 修正了**FanQieNovel**中许多未解决的问题
 ### v0.1.3 (2023/3/17)
 - **meth.py**兼容性增强, 采用更优雅的方式
 ### v0.1.2 (2023/3/13)
